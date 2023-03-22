@@ -1,4 +1,5 @@
 const grid_item = document.querySelectorAll(".grid-item");
+const reset_bttn = document.getElementById("reset-bttn");
 
 let turn = 1;
 
@@ -10,6 +11,9 @@ function reset(){
     })
 }
 
+reset_bttn.addEventListener('click', c =>{
+    reset();
+})
 
 grid_item.forEach(item =>{
     item.addEventListener('click', c =>{
