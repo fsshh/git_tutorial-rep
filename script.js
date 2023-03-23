@@ -73,7 +73,6 @@ grid_item.forEach(item =>{
     }) 
 })
 
-
 // check the game's winner by identifying the winning conditions
 grid_item.forEach(item =>{
     item.addEventListener('click', c =>{
