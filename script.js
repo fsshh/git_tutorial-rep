@@ -27,3 +27,51 @@ grid_item.forEach(item =>{
         }
     }) 
 })
+
+let win = false;
+let player = '';
+function winCombination(t1, t2, t3){
+    if(grid_item[t1].classList.contains("x-turn")){
+        if(grid_item[t2].classList.contains("x-turn")){
+            if(grid_item[t3].classList.contains("x-turn")){
+                win = true;
+                player = '2';
+            }
+        }
+    }
+
+    if(grid_item[t1].classList.contains("o-turn")){
+        if(grid_item[t2].classList.contains("o-turn")){
+            if(grid_item[t3].classList.contains("o-turn")){
+                win = true;
+                player = '1';
+            }
+        }
+    }
+
+    if(win == true){
+        setTimeout(t =>{
+            alert(`player ${player} win`);
+            reset();            
+        }, 100)
+        win = false;
+    }
+}
+
+grid_item.forEach(item =>{
+    item.addEventListener('click', c =>{
+        // column win combinations
+        winCombination(0, 1, 2);
+        winCombination(3, 4, 5);
+        winCombination(6, 7, 8);
+
+        // row win combinations
+        winCombination(0, 3, 6);
+        winCombination(1, 4, 7);
+        winCombination(2, 5, 8);
+
+        // diagonal win combinations
+        winCombination(2, 4, 6);
+        winCombination(0, 4, 8);
+    })
+})
