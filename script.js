@@ -1,13 +1,13 @@
 const grid_item = document.querySelectorAll(".grid-item");
 const reset_bttn = document.getElementById("reset-bttn");
 
-let turn = 1;
+let turn = 0;
 
 function reset(){
     grid_item.forEach(item =>{
         item.classList.remove("x-turn");
         item.classList.remove("o-turn");
-        turn = 1;
+        turn = 0;
     })
 }
 
@@ -24,7 +24,7 @@ function winCombination(t1, t2, t3){
         if(grid_item[t2].classList.contains("x-turn")){
             if(grid_item[t3].classList.contains("x-turn")){
                 win = true;
-                player = '2';
+                player = '1';
             }
         }
     }
@@ -33,7 +33,7 @@ function winCombination(t1, t2, t3){
         if(grid_item[t2].classList.contains("o-turn")){
             if(grid_item[t3].classList.contains("o-turn")){
                 win = true;
-                player = '1';
+                player = '2';
             }
         }
     }
@@ -42,14 +42,34 @@ function winCombination(t1, t2, t3){
         setTimeout(t =>{
             alert(`player ${player} win`);
             reset();            
-        }, 100)
+        }, 150)
         win = false;
     }
-    else if(draw == true){
+
+    grid_item.forEach(item =>{
+        item.addEventListener('click', c =>{
+            setTimeout(t =>{
+                // turn = number of grid item
+                if(win == true && turn == 9){
+                    draw = false;
+                }
+                if(turn < 2){
+                    if(win == false && turn == 9){
+                        draw = true;
+                    }
+                }
+            }, 100)
+            console.log(turn);
+            console.log(draw);
+
+        })
+    })    
+    
+    if(draw == true){
         setTimeout(t =>{
             alert('Draw');
             reset();            
-        }, 100)
+        }, 150)
         draw = false;
     }
 }
@@ -65,11 +85,6 @@ grid_item.forEach(item =>{
             item.classList.add("o-turn");
             turn++;
         }
-        setTimeout(t =>{
-            if(win == false && turn == 9){
-                draw = true;
-            }
-        }, 100)
     }) 
 })
 
