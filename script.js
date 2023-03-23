@@ -17,12 +17,13 @@ reset_bttn.addEventListener('click', c =>{
 
 grid_item.forEach(item =>{
     item.addEventListener('click', c =>{
-        if(turn % 2 == 0){
+        if(turn % 2 == 0 && !item.classList.contains("o-turn")){
             item.classList.add("x-turn");
             turn++;
-        }else{
+        }
+        else if(turn % 2 == 1 && !item.classList.contains("x-turn")){
             item.classList.add("o-turn");
             turn++;
         }
-    })    
+    }) 
 })
